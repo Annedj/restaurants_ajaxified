@@ -1,7 +1,17 @@
-<h1>Restaurants</h1>
+<div class="container my-5">
+  <h1>Restaurants</h1>
 
-<ul>
-  <% @restaurants.each do |restaurant| %>
-    <li><%= link_to restaurant.name, restaurant_path(restaurant) %></li>
-  <% end %>
-</ul>
+  <ul class="p-0">
+    <% @restaurants.each do |restaurant| %>
+      <%= link_to restaurant_path(restaurant), class:'text-decoration-none' do %>
+        <div class="card-product my-3">
+          <img src="https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19-500x500.jpg" />
+          <div class="card-product-infos text-dark">
+            <h2><%= restaurant.name %></h2>
+            <p><%= restaurant.address %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

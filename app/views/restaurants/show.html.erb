@@ -1,19 +1,27 @@
-<h1><%= @restaurant.name %> <small><%= @restaurant.address %></small></h1>
-<h2>
-  <%= pluralize @restaurant.reviews.size, "review" %>
-</h2>
+<div class="container my-5">
+  <div class="pb-5">
+    <h1><%= @restaurant.name %></h1>
+    <p><%= @restaurant.address %></p>
+    <%= link_to "Back to all our restaurants", restaurants_path, class: "my-5 py-5" %>
+  </div>
+  <h3>
+    <%= pluralize @restaurant.reviews.size, "review" %>
+  </h3>
 
-<div id="reviews">
-  <% if @restaurant.reviews.blank? %>
-    Be the first to leave a review for <%= @restaurant.name %>
-  <% else %>
-    <% @restaurant.reviews.each do |review| %>
-      <p><%= review.content %></p>
+  <div id="reviews" class="pb-5">
+    <% if @restaurant.reviews.blank? %>
+      Be the first to leave a review for <%= @restaurant.name %>!
+    <% else %>
+      <% @restaurant.reviews.each do |review| %>
+        <p id="review-<%= review.id %>"><%= review.content %></p>
+        <%= link_to "Delete", review, method: :delete, remote: true %>
+      <% end %>
     <% end %>
+  </div>
+
+  <%= simple_form_for([ @restaurant, @review ], remote: true) do |f| %>
+    <%= f.input :content, as: :text %>
+    <%= f.button :submit, class: "btn btn-primary" %>
   <% end %>
 </div>
 
-<%= simple_form_for([ @restaurant, @review ]) do |f| %>
-  <%= f.input :content, as: :text %>
-  <%= f.button :submit %>
-<% end %>

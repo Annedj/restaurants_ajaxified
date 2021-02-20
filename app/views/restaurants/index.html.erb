@@ -1,7 +1,7 @@
 <div class="container my-5">
   <h1>Restaurants</h1>
 
-  <ul class="p-0">
+  <ul class="p-0 mb-4">
     <% @restaurants.each do |restaurant| %>
       <%= link_to restaurant_path(restaurant), class:'text-decoration-none' do %>
         <div class="card-product my-3">
@@ -14,4 +14,6 @@
       <% end %>
     <% end %>
   </ul>
+
+  <%= link_to 'Back to Home page', root_path %>
 </div>
